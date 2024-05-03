@@ -1,0 +1,6 @@
+[submodule "csinsight_backend"]
+	path = csinsight_backend
+	url = https://github.com/muhammadtalha242/csinsight_backend.git
+[submodule "csinsight_frontend"]
+	path = csinsight_frontend
+	url = https://github.com/muhammadtalha242/csinsight_frontend.git

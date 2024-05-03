@@ -1,0 +1,53 @@
+version: '0.1'
+
+services:
+
+  backend:
+    build: ./csinsight_backend
+    container_name: nextjs-backend
+    volumes:
+      - ./csinsight_backend:/app
+    expose:
+      - 8080    
+    ports:
+      - 8080:8080
+    env_file:
+      - ./csinsight_backend/.env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    command: npm start
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+  
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+
+  frontend:
+    build: ./csinsight_frontend
+    container_name: nextjs-frontend
+    expose:
+      - 80    
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
