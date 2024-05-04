@@ -16,6 +16,7 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - POSTGRES_HOST=postgres
     command: npm start
     depends_on:
       - redis
