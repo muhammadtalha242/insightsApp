@@ -20,7 +20,15 @@
 
 ## Introduction
 
-InsightsApp is a powerful tool designed to provide comprehensive insights and analytics for various data sources. It is built with a modular architecture to allow easy integration and extension of functionalities.
+InsightsApp is a powerful tool designed to provide comprehensive insights and analytics for various data sources, with a focus on Semantic Scholars. It is built with a modular architecture to allow easy integration and extension of functionalities.
+
+The backend of InsightsApp is implemented as a RESTful API, providing a robust and scalable infrastructure for data processing and analysis. It leverages the power of Node.js and utilizes PostgreSQL as the database to efficiently store and retrieve data.
+
+On the frontend, InsightsApp offers a rich set of visualizations and interactive interfaces to explore and analyze the data. It is built with Next.js, a popular React framework, which enables fast and responsive user experiences.
+
+With InsightsApp, users can gain valuable insights from Semantic Scholars data, visualize trends and patterns, and make data-driven decisions. Whether it's analyzing research papers, exploring citation networks, or tracking the impact of scientific publications, InsightsApp provides a comprehensive solution for data analysis and visualization.
+
+By combining the power of modular architecture, RESTful API, PostgreSQL, and advanced visualizations, InsightsApp empowers researchers, scientists, and data enthusiasts to unlock the full potential of Semantic Scholars data and gain valuable insights for their projects and research endeavors.
 
 ## Features
 
@@ -33,7 +41,7 @@ Follow these instructions to set up and run the project on your local machine.
 
 ### Prerequisites
 
-- Node.js 14+
+- Node.js 21+
 - Docker
 
 ### Installation
@@ -63,7 +71,7 @@ Follow these instructions to set up and run the project on your local machine.
 
 3. **Access the Application**
 
-    Once the application is running, open your browser and navigate to `http://localhost:3000` to access the frontend interface. From there, you can explore the various features and functionalities of the InsightsApp.
+    Once the application is running, open your browser and navigate to `http://localhost:80` to access the frontend interface. From there, you can explore the various features and functionalities of the InsightsApp.
 
 - **backend**: Contains the Node backend code.
 - **frontend**: Contains the Nextjs frontend code.
@@ -72,7 +80,7 @@ Each submodule has its own README file with specific instructions on how to set 
 
 ## Usage
 
-Once the application is running, open your browser and navigate to `http://localhost:3000` to access the frontend interface. From there, you can explore the various features and functionalities of the InsightsApp.
+Once the application is running, open your browser and navigate to `http://localhost:80` to access the frontend interface. From there, you can explore the various features and functionalities of the InsightsApp.
 
 ## Contributing
 
