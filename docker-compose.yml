@@ -1,6 +1,36 @@
-version: '0.1'
+version: "3.1"
 
 services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+    networks:
+      - cs_network
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    volumes:
+      - csinsight_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_DB=csinsight
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+    networks:
+      - cs_network
 
   backend:
     build: ./csinsight_backend
@@ -8,7 +38,7 @@ services:
     volumes:
       - ./csinsight_backend:/app
     expose:
-      - 8080    
+      - 8080
     ports:
       - 8080:8080
     env_file:
@@ -17,38 +47,36 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - POSTGRES_HOST=postgres
+      - POSTGRES_DB=csinsight
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
     command: npm start
     depends_on:
       - redis
       - postgres
-
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - 6379:6379
-    expose:
-      - 6379
-  
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    expose:
-      - 5432
+    restart: always
+    networks:
+      - cs_network
 
   frontend:
     build: ./csinsight_frontend
     container_name: nextjs-frontend
-    expose:
-      - 80    
+    command: nginx -g "daemon off;"
     ports:
-      - 80:80
-    depends_on:
-      - backend
+      - 3000:80
+      - 443:443
+    restart: always
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    volumes:
+      - /etc/letsencrypt/live/cs-insights/privkey.pem:/etc/letsencrypt/live/cs-insights/privkey.pem
+      - /etc/letsencrypt/live/cs-insights/fullchain.pem:/etc/letsencrypt/live/cs-insights/fullchain.pem
+    networks:
+      - cs_network
 
 volumes:
-  postgres_data:
+  csinsight_data:
+    external: true
+
+networks:
+  cs_network
