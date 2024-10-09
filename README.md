@@ -15,21 +15,18 @@
   <br />
   <a href="http://cs-insights.uni-goettingen.de/">View Demo</a>
   </div>
-  
+
 ## Table of Contents
 
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Dataset](#dataset)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Configuration](#configuration)
   - [Database Setup](#database-setup)
   - [Running the Application](#running-the-application)
-- [API Endpoints](#api-endpoints)
-- [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -67,49 +64,25 @@ By combining modular architecture, a robust RESTful API, efficient PostgreSQL da
 - **Redis**: In-memory data structure store, used as a database, cache, and message broker.
 - **dotenv**: Module to load environment variables from a `.env` file into `process.env`.
 
-## Dataset
-
-InsightsAPP utilizes a comprehensive dataset of academic papers, encapsulated within the `papers` table in PostgreSQL. The dataset includes, but is not limited to, the following fields:
-
-- **id**: UUID - Primary key.
-- **publicationvenueid**: UUID - Identifier for the publication venue.
-- **venue**: STRING - Name of the publication venue.
-- **citationcount**: INTEGER - Number of citations the paper has received.
-- **authors**: JSONB - Array of author objects containing details like `authorId`.
-- **s2fieldsofstudy**: JSONB - Array of field of study objects containing categories.
-- **year**: INTEGER - Year of publication.
-- **openAccess**: BOOLEAN - Indicates if the paper is open access.
-- **publicationtypes**: ARRAY of STRING - Types/categories of the publication.
-- **publisher**: STRING - Name of the publisher.
-
-**Note**: Ensure that the dataset is preprocessed and loaded into the PostgreSQL database before running the application.
-
 ## Getting Started
 
-Follow these steps to set up and run InsightsAPP locally.
+To get a local copy up and running follow these simple example steps. The project relies on a singe docker-compose.yml file that is used to develop and deploy all the services.
 
 ### Prerequisites
 
-- **Node.js** (v14.17.0 or later)
-- **npm** (v6.14.13 or later)
-- **PostgreSQL** (v13.3 or later)
-- **Redis** (v6.2 or later) - Optional, for caching
-- **Git** - To clone the repository
+You need to have `docker` and the `docker-compose-plugin` installed.
 
 ### Installation
 
-1. **Clone the Repository**
+First, clone the repository and its submodules locally.
 
-   ```bash
-   git clone https://github.com/muhammadtalha242/insightsApp.git
-   cd insightsApp
-   ```
+    git clone --recurse-submodules https://github.com/muhammadtalha242/insightsApp.git
 
-2. **Install Dependencies**
+If you are developing, it makes sense to start with the submodules (e.g., frontend, backend, ...) at their main branch. To update all submodules to main, run:
 
-   ```bash
-   npm install
-   ```
+   
+    git submodule foreach git pull origin main
+    
 
 ### Configuration
 
@@ -151,7 +124,7 @@ Follow these steps to set up and run InsightsAPP locally.
    \c your_db_name
    ```
 
-2. **Run Migrations**
+2. **Run Migrations (If Applicable)**
 
    Migrations set up the necessary tables and indexes.
 
@@ -159,7 +132,7 @@ Follow these steps to set up and run InsightsAPP locally.
    npx sequelize-cli db:migrate
    ```
 
-   **Note**: Ensure that your `sequelize` configuration is correctly set in `config/config.js` or `config/config.ts` based on your project setup.
+   **Note**: Ensure that your `sequelize` configuration is correctly set in `config/config.js` based on your project setup.
 
 3. **Seed the Database (If Applicable)**
 
@@ -171,19 +144,19 @@ Follow these steps to set up and run InsightsAPP locally.
 
 ### Running the Application
 
-Start the server in development mode with hot-reloading:
+1. **Set Up Environment Variables**
 
-```bash
-npm run dev
-```
+    Create a `.env` file in the `csinsight_backend` directory by copying the `.env.example` file and updating the values according to your environment.
 
-Or, start the server in production mode:
+2. **Start the Application**
 
-```bash
-npm start
-```
+    To start the development environment, run the following command:
 
-The server should be running on `http://localhost:8000` (or the port specified in your `.env` file).
+    ```sh
+    docker compose up --build
+    ```
+
+    This will start each service (e.g., backend, frontend) in development mode with hot reload. Whenever you change any files of the sub-repositories (e.g., ./csinsights_frontend/src/App.tsx) the development server will reload and show the new rendered frontend.
 
 ## Contributing
 
