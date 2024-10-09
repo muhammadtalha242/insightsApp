@@ -7,6 +7,15 @@
 ![Sequelize](https://img.shields.io/badge/Sequelize-6.6.5-blue.svg)
 ![Redis](https://img.shields.io/badge/Redis-6.2.5-orange.svg)
 
+ <div align="center">
+  <a href="https://cs-insights.uni-goettingen.de">
+    <img src="images/Color logo - no background.png" alt="Logo" width="500">
+  </a>
+  <br />
+  <br />
+  <a href="http://cs-insights.uni-goettingen.de/">View Demo</a>
+  </div>
+  
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -25,17 +34,11 @@
 - [License](#license)
 - [Contact](#contact)
 
- <div align="center">
-  <a href="https://cs-insights.uni-goettingen.de">
-    <img src="images/Color logo - no background.png" alt="Logo" width="500">
-  </a>
-  <br />
-  <br />
-  <a href="http://cs-insights.uni-goettingen.de/">View Demo</a>
-  </div>
+
+![An overview of the components in the CS-Insights ecosystem (in GitHub light mode)](images/system-overview-light.png#gh-light-mode-only)
+![An overview of the components in the CS-Insights ecosystem (in GitHub dark mode)](images/system-overview-dark.png#gh-dark-mode-only)
 
 ## Introduction
-
 
 **InsightsApp** is a powerful analytics tool designed to deliver comprehensive insights and analytics across various data sources, with a specialized focus on Semantic Scholars. Built with a modular architecture, InsightsApp ensures easy integration and scalability, allowing users to extend functionalities seamlessly to meet diverse analytical needs.
 
